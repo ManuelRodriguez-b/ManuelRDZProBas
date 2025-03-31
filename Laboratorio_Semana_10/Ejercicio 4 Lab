@@ -1,0 +1,49 @@
+import math
+
+def calcular_estadisticas(*args):
+  """
+  Calcula el promedio, la mediana y la desviación estándar de una lista de números.
+
+  Args:
+    *args: Una lista de números.
+
+  Returns:
+    Una tupla con el promedio, la mediana y la desviación estándar.
+  """
+  numeros = list(args)
+  n = len(numeros)
+
+  if n == 0:
+      return 0, 0, 0
+
+  # Promedio (usando lambda)
+  promedio = sum(numeros) / n
+
+  # Mediana
+  numeros_ordenados = sorted(numeros)
+  if n % 2 == 0:
+      mediana = (numeros_ordenados[n//2 - 1] + numeros_ordenados[n//2]) / 2
+  else:
+      mediana = numeros_ordenados[n//2]
+      
+  # Desviación estándar
+  suma_cuadrados_diferencias = sum([(x - promedio)**2 for x in numeros])
+  desviacion_estandar = math.sqrt(suma_cuadrados_diferencias / n)
+  
+  return promedio, mediana, desviacion_estandar
+
+if __name__ == "__main__":
+  try:
+    entrada = input("Introduce una lista de números separados por espacios: ")
+    numeros = [float(x) for x in entrada.split()]
+
+    promedio, mediana, desviacion_estandar = calcular_estadisticas(*numeros)
+
+    print(f"Promedio: {promedio}")
+    print(f"Mediana: {mediana}")
+    print(f"Desviación estándar: {desviacion_estandar}")
+
+  except ValueError:
+    print("Entrada inválida. Por favor, introduce solo números separados por espacios.")
+  except Exception as e:
+    print(f"Ocurrió un error: {e}")
