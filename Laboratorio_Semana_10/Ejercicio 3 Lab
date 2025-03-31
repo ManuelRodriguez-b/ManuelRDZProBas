@@ -1,0 +1,56 @@
+def agregar_contacto(agenda):
+  nombre = input("Ingrese el nombre del contacto: ")
+  numero = input("Ingrese el número de teléfono: ")
+  correo = input("Ingrese el correo electrónico: ")
+  agenda.append((nombre, numero, correo))
+  print("Contacto agregado exitosamente.")
+
+
+def buscar_contacto(agenda):
+  nombre = input("Ingrese el nombre del contacto a buscar: ")
+  for contacto in agenda:
+    if contacto[0] == nombre:
+      print("Nombre:", contacto[0])
+      print("Número:", contacto[1])
+      print("Correo:", contacto[2])
+      return
+  print("Contacto no encontrado.")
+
+
+def listar_contactos(agenda):
+  agenda_ordenada = sorted(agenda, key=lambda x: x[0])  # Se ordena alfabéticamente por nombre
+  print("Lista de contactos:")
+  for contacto in agenda_ordenada:
+    print("Nombre:", contacto[0])
+    print("Número:", contacto[1])
+    print("Correo:", contacto[2])
+    print("-" * 20)
+
+
+def main():
+  agenda = []
+
+  while True:
+    print("\nMenú:")
+    print("1. Agregar contacto")
+    print("2. Buscar contacto")
+    print("3. Listar contactos")
+    print("4. Salir")
+
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "1":
+      agregar_contacto(agenda)
+    elif opcion == "2":
+      buscar_contacto(agenda)
+    elif opcion == "3":
+      listar_contactos(agenda)
+    elif opcion == "4":
+      print("Saliendo del programa...")
+      break
+    else:
+      print("Opción inválida.")
+
+
+if __name__ == "__main__":
+  main()
