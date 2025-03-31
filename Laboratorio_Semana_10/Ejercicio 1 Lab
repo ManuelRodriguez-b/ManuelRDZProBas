@@ -1,0 +1,44 @@
+import re
+
+def analizar_texto(texto):
+    """
+    Analiza un texto para determinar el número total de palabras, palabras únicas, 
+    frecuencia de cada palabra y la palabra más frecuente.
+    """
+
+    # Se eliminan caracteres especiales y se convierten a minúsculas
+    texto = re.sub(r'[^\w\s]', '', texto).lower()
+    palabras = texto.split()
+
+    # Se calcula el número total de palabras
+    total_palabras = len(palabras)
+
+    # Se encuentran las palabras únicas
+    palabras_unicas = set(palabras)
+    cantidad_palabras_unicas = len(palabras_unicas)
+
+    # Se calcula la frecuencia de cada palabra
+    frecuencia_palabras = {}
+    for palabra in palabras:
+        frecuencia_palabras[palabra] = frecuencia_palabras.get(palabra, 0) + 1
+
+    # Se encuentra la palabra más frecuente
+    palabra_mas_frecuente = ""
+    max_frecuencia = 0
+    for palabra, frecuencia in frecuencia_palabras.items():
+        if frecuencia > max_frecuencia:
+            max_frecuencia = frecuencia
+            palabra_mas_frecuente = palabra
+
+    # Se muestra el resumen
+    print("Resumen del análisis del texto:")
+    print(f"Número total de palabras: {total_palabras}")
+    print(f"Cantidad de palabras únicas: {cantidad_palabras_unicas}")
+    print("\nFecuencia de cada palabra:")
+    for palabra, frecuencia in frecuencia_palabras.items():
+        print(f"  {palabra}: {frecuencia}")
+    print(f"\nPalabra más frecuente: '{palabra_mas_frecuente}' ({max_frecuencia} veces)")
+
+# Se obtiene texto del usuario
+texto_usuario = input("Ingresa un texto: ")
+analizar_texto(texto_usuario)
