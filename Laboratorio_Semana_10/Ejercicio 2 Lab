@@ -1,0 +1,77 @@
+class Producto:
+    def __init__(self, nombre, categoria, precio, cantidad):
+        self.nombre = nombre
+        self.categoria = categoria
+        self.precio = precio
+        self.cantidad = cantidad
+
+    def __str__(self):
+        return f"Nombre: {self.nombre}, Categoría: {self.categoria}, Precio: {self.precio}, Cantidad: {self.cantidad}"
+
+
+def agregar_producto(inventario):
+    nombre = input("Ingrese el nombre del producto: ")
+    categoria = input("Ingrese la categoría del producto: ")
+    precio = float(input("Ingrese el precio del producto: "))
+    cantidad = int(input("Ingrese la cantidad del producto: "))
+    inventario.append(Producto(nombre, categoria, precio, cantidad))
+    print("Producto agregado correctamente.")
+
+
+def eliminar_producto(inventario):
+    nombre = input("Ingrese el nombre del producto a eliminar: ")
+    for i, producto in enumerate(inventario):
+        if producto.nombre == nombre:
+            inventario.pop(i)
+            print("Producto eliminado correctamente.")
+            return
+    print("Producto no encontrado.")
+
+
+def buscar_producto(inventario):
+    nombre = input("Ingrese el nombre del producto a buscar: ")
+    for producto in inventario:
+        if producto.nombre == nombre:
+            print(producto)
+            return
+    print("Producto no encontrado.")
+
+
+def mostrar_inventario(inventario):
+    if not inventario:
+        print("El inventario está vacío.")
+        return
+    
+    inventario_ordenado = sorted(inventario, key=lambda x: x.precio)
+    for producto in inventario_ordenado:
+      print(producto)
+
+
+def main():
+    inventario = []
+    while True:
+        print("\nMenú:")
+        print("1. Agregar producto")
+        print("2. Eliminar producto")
+        print("3. Buscar producto")
+        print("4. Mostrar inventario")
+        print("5. Salir")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            agregar_producto(inventario)
+        elif opcion == "2":
+            eliminar_producto(inventario)
+        elif opcion == "3":
+            buscar_producto(inventario)
+        elif opcion == "4":
+            mostrar_inventario(inventario)
+        elif opcion == "5":
+            break
+        else:
+            print("Opción inválida.")
+
+
+if __name__ == "__main__":
+    main()
