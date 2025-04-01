@@ -1,0 +1,61 @@
+# Módular
+import math
+
+def calcular_area_circulo(radio):
+  """Calcula el área de un círculo."""
+  return math.pi * radio**2
+
+def calcular_area_rectangulo(base, altura):
+  """Calcula el área de un rectángulo."""
+  return base * altura
+
+
+# Clase orientada a Objetos
+class FiguraGeometrica:
+  def __init__(self, nombre):
+    self.nombre = nombre
+
+  def calcular_area(self):
+    """Método abstracto para calcular el área."""
+    raise NotImplementedError("Debes implementar este método en la subclase")
+
+class Circulo(FiguraGeometrica):
+  def __init__(self, radio):
+    super().__init__("Círculo")
+    self.radio = radio
+
+  def calcular_area(self):
+    return calcular_area_circulo(self.radio)
+
+class Rectangulo(FiguraGeometrica):
+  def __init__(self, base, altura):
+    super().__init__("Rectángulo")
+    self.base = base
+    self.altura = altura
+    
+  def calcular_area(self):
+    return calcular_area_rectangulo(self.base, self.altura)
+
+
+# Programa principal: Imperativa y Estructurada
+def main():
+  figuras = []
+
+  # Creación de objetos
+  figuras.append(Circulo(5))
+  figuras.append(Rectangulo(4, 6))
+
+  # Iteración y cálculo de áreas
+  for figura in figuras:
+    area = figura.calcular_area() #Uso de función (Estructurada)
+    print(f"El área del {figura.nombre} es: {area}")
+    
+    # Ejemplo de condicional
+    if area > 20:
+      print(f"El área del {figura.nombre} es mayor que 20.")
+    else:
+      print(f"El área del {figura.nombre} es menor o igual a 20.")
+
+
+if __name__ == "__main__":
+  main()
