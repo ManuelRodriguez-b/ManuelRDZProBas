@@ -1,0 +1,41 @@
+import random
+
+def quicksort(arr):
+  if len(arr) < 2:
+    return arr
+  else:
+    pivot = arr[0]
+    less = [i for i in arr[1:] if i <= pivot]
+    greater = [i for i in arr[1:] if i > pivot]
+    return quicksort(less) + [pivot] + quicksort(greater)
+
+def binary_search(arr, target):
+  low = 0
+  high = len(arr) - 1
+  while low <= high:
+    mid = (low + high) // 2
+    if arr[mid] == target:
+      return mid
+    elif arr[mid] < target:
+      low = mid + 1
+    else:
+      high = mid - 1
+  return -1
+
+# Se genera la lista de números aleatorios
+random_list = [random.randint(1, 100) for _ in range(20)]
+print("Lista original:", random_list)
+
+
+# Se ordena la lista usando Quicksort
+sorted_list = quicksort(random_list)
+print("Lista ordenada:", sorted_list)
+
+# Búsqueda binaria
+target_number = int(input("Introduce el número a buscar: "))
+index = binary_search(sorted_list, target_number)
+
+if index != -1:
+  print(f"El número {target_number} se encuentra en el índice {index}.")
+else:
+  print(f"El número {target_number} no se encuentra en la lista.")
